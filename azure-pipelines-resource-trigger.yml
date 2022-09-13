@@ -5,8 +5,7 @@ trigger: none
 resources:
   pipelines:
   - pipeline: MyCIAlias
-    project: Fabrikam
-    source: Farbrikam-CI
+    source: flcdrg.azure-pipelines-resource-triggers-main
     branch: main      ### This branch input cannot have wild cards. It is used for evaluating default version when pipeline is triggered manually or scheduled.
 
 pool:
