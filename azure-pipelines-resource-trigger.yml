@@ -1,0 +1,17 @@
+# Pipeline that is triggered on completion of azure-pipelines.yml
+
+trigger: none
+
+resources:
+  pipelines:
+  - pipeline: MyCIAlias
+    project: Fabrikam
+    source: Farbrikam-CI
+    branch: main      ### This branch input cannot have wild cards. It is used for evaluating default version when pipeline is triggered manually or scheduled.
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
