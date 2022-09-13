@@ -9,3 +9,5 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+- publish: $(System.DefaultWorkingDirectory)
+  artifact: Stuff
