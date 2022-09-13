@@ -6,6 +6,13 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: UseDotNet@2
+  displayName: 'dotnet: Use .NET SDK 6.x'
+  inputs:
+    version: 6.x
+    packageType: sdk
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
 - script: dotnet nbgv cloud
   displayName: 'nbgv'
 
