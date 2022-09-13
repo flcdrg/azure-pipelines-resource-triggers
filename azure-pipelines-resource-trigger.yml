@@ -6,7 +6,7 @@ resources:
   pipelines:
   - pipeline: MyCIAlias
     source: flcdrg.azure-pipelines-resource-triggers-main
-    branch: main      ### This branch input cannot have wild cards. It is used for evaluating default version when pipeline is triggered manually or scheduled.
+    branch: main
     trigger:
       branches:
         include:
