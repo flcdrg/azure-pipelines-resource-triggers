@@ -12,14 +12,10 @@ resources:
         include:
           - main
 
-variables:
-  MyBuild: $(Resources.Pipeline.MyCIAlias.RunName)
-
-name: $(MyBuild)
-
 pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyCIAlias.RunName)"
 - script: printenv
   displayName: 'Run a one-line script'
