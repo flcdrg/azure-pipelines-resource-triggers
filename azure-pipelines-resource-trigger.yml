@@ -12,6 +12,11 @@ resources:
         include:
           - main
 
+variables:
+  MyBuild: $(Resources.Pipeline.MyCIAlias.RunName)
+
+name: $(MyBuild)
+
 pool:
   vmImage: ubuntu-latest
 
