@@ -6,8 +6,8 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: dotnet nbgv cloud
+  displayName: 'nbgv'
 
 - publish: $(System.DefaultWorkingDirectory)
   artifact: Stuff
