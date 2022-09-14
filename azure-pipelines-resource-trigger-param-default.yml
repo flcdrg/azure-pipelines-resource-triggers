@@ -1,0 +1,26 @@
+# Pipeline that is triggered on completion of azure-pipelines.yml and azure-pipelines-resource-trigger.yml
+parameters:
+  - name: Something
+    type: boolean
+    displayName: A boolean parameter
+    default: true
+
+trigger: none
+
+resources:
+  pipelines:
+  - pipeline: MyMainAlias
+    source: flcdrg.azure-pipelines-resource-triggers-main
+    branch: main
+    trigger:
+      branches:
+        include:
+          - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyMainAlias.RunName)"
+- script: printenv
+  displayName: 'Run a one-line script'
