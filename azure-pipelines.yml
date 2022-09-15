@@ -5,16 +5,29 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: UseDotNet@2
-  displayName: 'dotnet: Use .NET SDK 6.x'
-  inputs:
-    version: 6.x
-    packageType: sdk
-    installationPath: $(Agent.ToolsDirectory)/dotnet
+stages:
+  - stage: Stage1
+    jobs:
+    - job: Job1
+      steps:
+      - task: UseDotNet@2
+        displayName: 'dotnet: Use .NET SDK 6.x'
+        inputs:
+          version: 6.x
+          packageType: sdk
+          installationPath: $(Agent.ToolsDirectory)/dotnet
 
-- script: nbgv cloud
-  displayName: 'nbgv'
+      - script: nbgv cloud
+        displayName: 'nbgv'
 
-- publish: $(System.DefaultWorkingDirectory)
-  artifact: Stuff
+      - publish: $(System.DefaultWorkingDirectory)
+        artifact: Stuff
+
+  - stage: Stage2
+    jobs:
+      - job: RunsOnServer
+        pool: Server
+        steps:
+        - task: Delay@1
+          inputs:
+            delayForMinutes: '1'
