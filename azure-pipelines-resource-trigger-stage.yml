@@ -13,6 +13,7 @@ resources:
           - main
       stages:
         - Stage1
+        - Stage2
 
 pool:
   vmImage: ubuntu-latest
