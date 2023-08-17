@@ -4,24 +4,32 @@ trigger: none
 
 resources:
   pipelines:
-  - pipeline: MyMainAlias
-    source: flcdrg.azure-pipelines-resource-triggers-main
-    branch: main
-    trigger:
-      branches:
-        include:
-          - main
-  - pipeline: MyChildAlias
-    source: flcdrg.azure-pipelines-resource-triggers-child
-    branch: main
-    trigger:
-      branches:
-        include:
-          - main
+    - pipeline: MyMainAlias
+      source: flcdrg.azure-pipelines-resource-triggers-main
+      branch: main
+      trigger:
+        branches:
+          include:
+            - main
+
+    - pipeline: MyChildAlias
+      source: flcdrg.azure-pipelines-resource-triggers-child
+      branch: main
+      trigger:
+        branches:
+          include:
+            - main
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyMainAlias.RunName)"
-- script: printenv
-  displayName: 'Run a one-line script'
+jobs:
+  - deployment: deploy
+    displayName: deploy triggered by $(RESOURCES.TRIGGERINGALIAS)
+    environment: "Environment1"
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyChildAlias.RunName)"
+            - script: printenv
+              displayName: "Run a one-line script"
