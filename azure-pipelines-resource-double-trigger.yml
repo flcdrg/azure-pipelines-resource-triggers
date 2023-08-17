@@ -24,12 +24,15 @@ pool:
 
 jobs:
   - deployment: deploy
-    displayName: deploy triggered by $(RESOURCES.TRIGGERINGALIAS)
+    displayName: deploy triggered by $(RESOURCES.TRIGGERINGALIAS) ${{ variables['resources.triggeringAlias'] }}
     environment: "Environment1"
     strategy:
       runOnce:
         deploy:
           steps:
             - script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyChildAlias.RunName)"
+              displayName: "Update build number"
             - script: printenv
-              displayName: "Run a one-line script"
+              displayName: "Environment"
+            - script: ls -al $(PIPELINE.WORKSPACE)
+              displayName: "List files in the pipeline workspace"
