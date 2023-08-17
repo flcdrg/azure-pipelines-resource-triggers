@@ -4,21 +4,23 @@ trigger: none
 
 resources:
   pipelines:
-  - pipeline: MyCIAlias
-    source: flcdrg.azure-pipelines-resource-triggers-main
-    branch: main
-    trigger:
-      branches:
-        include:
-          - main
-      stages:
-        - Stage1
-        - Stage2
+    - pipeline: MyCIAlias
+      source: flcdrg.azure-pipelines-resource-triggers-main
+      branch: main
+      trigger:
+        branches:
+          include:
+            - main
+        stages:
+          - Stage1
+          - Stage2
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyCIAlias.RunName)"
-- script: printenv
-  displayName: 'Run a one-line script'
+  - script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyCIAlias.RunName)"
+  - script: printenv
+    displayName: "Run a one-line script"
+  - publish: $(System.DefaultWorkingDirectory)
+    artifact: Stuff

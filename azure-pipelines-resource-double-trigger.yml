@@ -19,6 +19,11 @@ resources:
         branches:
           include:
             - main
+
+    - pipeline: ThirdAlias
+      source: flcdrg.azure-pipelines-resource-triggers-stage
+      branch: main
+         
 pool:
   vmImage: ubuntu-latest
 
@@ -33,6 +38,6 @@ jobs:
             - script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyChildAlias.RunName)"
               displayName: "Update build number"
             - script: printenv
-              displayName: "Environment"
+              displayName: "Environment from $(RESOURCES.TRIGGERINGALIAS)"
             - script: ls -al $(PIPELINE.WORKSPACE)
               displayName: "List files in the pipeline workspace"
