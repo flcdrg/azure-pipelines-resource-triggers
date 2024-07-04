@@ -5,12 +5,19 @@ Azure Pipelines resource triggers demo, with examples of [pipeline triggers](htt
 ```mermaid
 %%{init: {"flowchart": {"htmlLabels": true}} }%%
 flowchart LR;
-    A["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=18'>main</a>"]
-    B["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=19'>trigger</a>"]
-    C["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=26'>trigger stage</a>"]
-    D["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=21'>trigger params</a>"]
-    E["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=22'>trigger params default</a>"]
-    F["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=20'>double trigger</a>"]
+    A["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=18'>main</a>
+    <img src='https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-triggers-main?branchName=main'>"]
+    B["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=19'>trigger</a>
+    <img src='https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-triggers-child?branchName=main'>
+    "]
+    C["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=26'>trigger stage</a>
+    <img src='https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-triggers-stage?branchName=main'>"]
+    D["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=21'>trigger params</a>
+    <img src='https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-triggers-with-param?branchName=main'>"]
+    E["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=22'>trigger params default</a>
+    <img src='https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-triggers-param-with-default?branchName=main'>"]
+    F["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=20'>double trigger</a>
+    <img src='https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-double-trigger?branchName=main'>"]
     A-->B;
     A-->C;
     A-->D;
@@ -20,5 +27,3 @@ flowchart LR;
     C-->F;
 
 ```
-
-* [![Build Status](https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-double-trigger?branchName=main)](https://dev.azure.com/gardiner/GitHub%20Builds/_build/latest?definitionId=20&branchName=main)
