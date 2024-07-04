@@ -29,7 +29,7 @@ steps:
 - task: DownloadPipelineArtifact@2
   inputs:
     buildType: specific
-    project: $(Resources.Pipeline.MyCIAlias.Project)
+    project: $(Resources.Pipeline.MyCIAlias.ProjectId)
     definition: $(Resources.Pipeline.MyCIAlias.PipelineId)
     pipelineId: $(Resources.Pipeline.MyCIAlias.RunId)
 
