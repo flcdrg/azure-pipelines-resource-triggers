@@ -15,7 +15,23 @@ resources:
 pool:
   vmImage: ubuntu-latest
 
+workspace:
+  clean: all
+
 steps:
+- script: |
+    env -0 | sort -z | tr '\0' '\n'
+  displayName: 'Script: Dump environment'
+
 - script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyCIAlias.RunName)"
-- script: printenv
-  displayName: 'Run a one-line script'
+  displayName: 'Script: Set build number'
+
+- task: DownloadPipelineArtifact@2
+  inputs:
+    buildType: specific
+    project: $(Resources.Pipeline.MyCIAlias.Project)
+    definition: $(Resources.Pipeline.MyCIAlias.PipelineId)
+    pipelineId: $(Resources.Pipeline.MyCIAlias.RunId)
+
+- script: ls -alR $(Pipeline.Workspace)
+  displayName: 'Script: List all files on the agent'
