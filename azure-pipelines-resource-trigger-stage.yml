@@ -20,7 +20,10 @@ pool:
 
 steps:
   - script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyCIAlias.RunName)"
-  - script: printenv
-    displayName: "Run a one-line script"
+
+  - script: |
+      env -0 | sort -z | tr '\0' '\n'
+    displayName: 'Script: Dump environment'
+
   - publish: $(System.DefaultWorkingDirectory)
     artifact: Stuff
