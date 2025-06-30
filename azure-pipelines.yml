@@ -11,9 +11,9 @@ stages:
     - job: Job1
       steps:
       - task: UseDotNet@2
-        displayName: 'dotnet: Use .NET SDK 6.x'
+        displayName: 'dotnet: Use .NET SDK 8.x'
         inputs:
-          version: 6.x
+          version: 8.x
           packageType: sdk
           installationPath: $(Agent.ToolsDirectory)/dotnet
 
