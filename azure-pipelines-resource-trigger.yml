@@ -44,6 +44,7 @@ jobs:
       - script: ls -alR $(Pipeline.Workspace)
         displayName: "Script: List all files on the agent"
 
+  # As a deployment job, this will download pipeline artifacts, including those from the resource trigger pipeline
   - deployment: ResourceTriggerDeployment
     displayName: "Resource Trigger Deployment"
     environment: Environment1
