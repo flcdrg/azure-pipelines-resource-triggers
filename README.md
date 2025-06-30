@@ -6,7 +6,7 @@ Azure Pipelines resource triggers demo, with examples of [pipeline triggers](htt
 %%{init: {"flowchart": {"htmlLabels": true}} }%%
 flowchart LR;
     A["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=18'>main</a>
-    <img src='https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-triggers-main?branchName=main'>"]
+    <img src='https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-triggers-main?branchName=main' />"]
     B["<a href='https://dev.azure.com/gardiner/GitHub%20Builds/_build?definitionId=19'>trigger</a>
     <img src='https://dev.azure.com/gardiner/GitHub%20Builds/_apis/build/status%2FAzure%20Pipelines%20Resource%20Triggers%2Fflcdrg.azure-pipelines-resource-triggers-child?branchName=main'>
     "]

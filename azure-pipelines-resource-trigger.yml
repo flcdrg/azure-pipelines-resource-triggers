@@ -4,34 +4,59 @@ trigger: none
 
 resources:
   pipelines:
-  - pipeline: MyCIAlias
-    source: flcdrg.azure-pipelines-resource-triggers-main
-    branch: main
-    trigger:
-      branches:
-        include:
-          - main
+    - pipeline: MyCIAlias
+      source: flcdrg.azure-pipelines-resource-triggers-main
+      branch: main
+      trigger:
+        branches:
+          include:
+            - main
 
 pool:
   vmImage: ubuntu-latest
 
-workspace:
-  clean: all
+jobs:
+  - job: ResourceTriggerJob
+    displayName: "Resource Trigger Job"
+    pool:
+      vmImage: "ubuntu-latest"
 
-steps:
-- script: |
-    env -0 | sort -z | tr '\0' '\n'
-  displayName: 'Script: Dump environment'
+    workspace:
+      clean: all
 
-- script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyCIAlias.RunName)"
-  displayName: 'Script: Set build number'
+    steps:
+      - checkout: none
 
-- task: DownloadPipelineArtifact@2
-  inputs:
-    buildType: specific
-    project: $(Resources.Pipeline.MyCIAlias.ProjectId)
-    definition: $(Resources.Pipeline.MyCIAlias.PipelineId)
-    pipelineId: $(Resources.Pipeline.MyCIAlias.RunId)
+      - script: |
+          env -0 | sort -z | tr '\0' '\n'
+        displayName: "Script: Dump environment"
 
-- script: ls -alR $(Pipeline.Workspace)
-  displayName: 'Script: List all files on the agent'
+      - script: echo "##vso[build.updatebuildnumber]$(Resources.Pipeline.MyCIAlias.RunName)"
+        displayName: "Script: Set build number"
+
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          buildType: specific
+          project: $(Resources.Pipeline.MyCIAlias.ProjectId)
+          definition: $(Resources.Pipeline.MyCIAlias.PipelineId)
+          pipelineId: $(Resources.Pipeline.MyCIAlias.RunId)
+
+      - script: ls -alR $(Pipeline.Workspace)
+        displayName: "Script: List all files on the agent"
+
+  - deployment: ResourceTriggerDeployment
+    displayName: "Resource Trigger Deployment"
+    environment: Environment1
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - script: echo "Deploying to environment"
+              displayName: "Script: Deploy to environment"
+
+            - script: |
+                env -0 | sort -z | tr '\0' '\n'
+              displayName: "Script: Dump environment"
+
+            - script: ls -alR $(Pipeline.Workspace)
+              displayName: "Script: List all files on the agent"
